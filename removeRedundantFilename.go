@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+var (
+	fileExt = []string{"md", "csv"} // 需要修改的文件类型
+)
+
 func main() {
 	// 从当前目录开始
 	removeRedundantFilename(".")
@@ -42,6 +46,10 @@ func removeRedundantFilename(baseDir string) {
 		names2Idx := strings.LastIndex(file.Name(), ".")
 		// 判断是否有多余的文件名
 		if names1Idx != -1 && names2Idx != -1 {
+			// 检查是否合法文件类型
+			if !checkFileExt(file.Name()) {
+				continue
+			}
 			newFilename := file.Name()[:names1Idx] + file.Name()[names2Idx:]
 			// 注意这块，注意补上文件的路径，避免出现找不到文件的错误：baseDir+pathSep+file.Name()
 			err = os.Rename(baseDir+pathSep+file.Name(), baseDir+pathSep+newFilename)
@@ -52,4 +60,14 @@ func removeRedundantFilename(baseDir string) {
 			}
 		}
 	}
+}
+
+// 检查是否为目标修改的文件类型
+func checkFileExt(filename string) bool {
+	for _, v := range fileExt {
+		if strings.Contains(filename, v) {
+			return true
+		}
+	}
+	return false
 }
