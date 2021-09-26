@@ -1,6 +1,6 @@
 builds:
-  - binary: MySQLMonitor
-    main: MySQLMonitor.go
+  - binary: removeRedundantFilename.go
+    main: removeRedundantFilename.go.go
     goos:
       - linux
       - windows
