@@ -1,6 +1,6 @@
 builds:
-  - binary: removeRedundantFilename.go
-    main: removeRedundantFilename.go.go
+  - binary: removeRedundantFilename
+    main: removeRedundantFilename.go
     goos:
       - linux
       - windows
