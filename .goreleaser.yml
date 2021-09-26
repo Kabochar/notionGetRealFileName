@@ -1,0 +1,18 @@
+builds:
+  - binary: MySQLMonitor
+    main: MySQLMonitor.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+
+archives:
+  - id: tgz
+    format: tar.gz
+    replacements:
+      darwin: macOS
+    format_overrides:
+      - goos: windows
+        format: zip
